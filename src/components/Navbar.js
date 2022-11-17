@@ -10,6 +10,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { useNavigate } from "react-router-dom";
+import { logOut } from "../helpers/firebase";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -32,6 +33,11 @@ export default function Navbar() {
   const handleRegister = () => {
     setAnchorEl(null);
     navigate("/register");
+  };
+  const handleLogout = () => {
+    setAnchorEl(null);
+    navigate("/login");
+    logOut();
   };
   const handleClose = () => {
     setAnchorEl(null);
@@ -82,6 +88,7 @@ export default function Navbar() {
               >
                 <MenuItem onClick={handleLogin}>Login</MenuItem>
                 <MenuItem onClick={handleRegister}>Register</MenuItem>
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
               </Menu>
             </div>
           )}

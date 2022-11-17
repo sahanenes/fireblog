@@ -10,17 +10,19 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { logIn } from "../helpers/firebase";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const theme = createTheme();
 
 export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    logIn(email, password, navigate);
   };
 
   return (
@@ -56,6 +58,8 @@ export default function Login() {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
             />
             <TextField
               margin="normal"
@@ -66,6 +70,8 @@ export default function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}

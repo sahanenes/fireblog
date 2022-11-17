@@ -12,6 +12,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
 import { createUser } from "../helpers/firebase";
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme();
 
@@ -19,9 +20,10 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
-    createUser(email, password);
+    createUser(email, password, navigate);
   };
 
   return (
