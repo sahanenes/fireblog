@@ -9,8 +9,11 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+  const navigate = useNavigate();
+
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -22,6 +25,14 @@ export default function Navbar() {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleLogin = () => {
+    setAnchorEl(null);
+    navigate("/login");
+  };
+  const handleRegister = () => {
+    setAnchorEl(null);
+    navigate("/register");
+  };
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -69,8 +80,8 @@ export default function Navbar() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Login</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                <MenuItem onClick={handleLogin}>Login</MenuItem>
+                <MenuItem onClick={handleRegister}>Register</MenuItem>
               </Menu>
             </div>
           )}
