@@ -5,6 +5,7 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -20,13 +21,14 @@ const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
 
-export const createUser = async (email, password, navigate) => {
+export const createUser = async (email, password, navigate, name) => {
   try {
     let userCredintial = await createUserWithEmailAndPassword(
       auth,
       email,
       password
     );
+    await updateProfile(auth.currentUser, { displayName: name });
     await navigate("/login");
     console.log(userCredintial);
   } catch (error) {
@@ -43,10 +45,11 @@ export const logIn = async (email, password, navigate) => {
   }
 };
 
-export const userObserver = () => {
+export const userObserver = (setCurrentUser) => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      console.log(user);
+      const { email, displayName } = user;
+      setCurrentUser({ email, displayName });
     } else {
       console.log("user loged out");
     }

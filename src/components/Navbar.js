@@ -12,12 +12,16 @@ import Menu from "@mui/material/Menu";
 import { useNavigate } from "react-router-dom";
 import { logOut } from "../helpers/firebase";
 
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+
 export default function Navbar() {
   const navigate = useNavigate();
+  const { currentUser } = useContext(AuthContext);
 
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
-
+  console.log(currentUser);
   const handleChange = (event) => {
     setAuth(event.target.checked);
   };

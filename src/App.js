@@ -1,13 +1,12 @@
-import { useEffect } from "react";
 import AppRouter from "./app-router/AppRouter";
-import { userObserver } from "./helpers/firebase";
+import AuthContextProvider from "./context/AuthContext";
 
 function App() {
-  useEffect(() => {
-    userObserver();
-  }, []);
-
-  return <AppRouter />;
+  return (
+    <AuthContextProvider>
+      <AppRouter />
+    </AuthContextProvider>
+  );
 }
 
 export default App;

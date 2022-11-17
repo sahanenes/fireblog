@@ -23,7 +23,7 @@ export default function Register() {
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
-    createUser(email, password, navigate);
+    createUser(email, password, navigate, name);
   };
 
   return (
