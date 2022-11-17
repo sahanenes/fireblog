@@ -10,9 +10,10 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { logIn } from "../helpers/firebase";
+import { logIn, signInWithGoogle } from "../helpers/firebase";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import GoogleIcon from "@mui/icons-material/Google";
 
 const theme = createTheme();
 
@@ -23,6 +24,9 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     logIn(email, password, navigate);
+  };
+  const handleGoogleProvider = () => {
+    signInWithGoogle(navigate);
   };
 
   return (
@@ -77,6 +81,15 @@ export default function Login() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
+            <Button
+              fullWidth
+              variant="contained"
+              type="button"
+              onClick={handleGoogleProvider}
+            >
+              Continue with Google
+              <GoogleIcon />
+            </Button>
             <Button
               type="submit"
               fullWidth

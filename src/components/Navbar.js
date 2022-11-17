@@ -65,6 +65,12 @@ export default function Navbar() {
           </Typography>
           {auth && (
             <div>
+              {currentUser && (
+                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                  {currentUser?.displayName}
+                </Typography>
+              )}
+
               <IconButton
                 size="large"
                 aria-label="account of current user"

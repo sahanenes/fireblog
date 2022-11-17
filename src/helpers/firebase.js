@@ -2,8 +2,10 @@ import { initializeApp } from "firebase/app";
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   updateProfile,
 } from "firebase/auth";
@@ -21,14 +23,14 @@ const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
 
-export const createUser = async (email, password, navigate, name) => {
+export const createUser = async (email, password, navigate, userName) => {
   try {
     let userCredintial = await createUserWithEmailAndPassword(
       auth,
       email,
       password
     );
-    await updateProfile(auth.currentUser, { displayName: name });
+    await updateProfile(auth.currentUser, { displayName: userName });
     await navigate("/login");
     console.log(userCredintial);
   } catch (error) {
@@ -51,11 +53,19 @@ export const userObserver = (setCurrentUser) => {
       const { email, displayName } = user;
       setCurrentUser({ email, displayName });
     } else {
-      console.log("user loged out");
+      setCurrentUser(false);
     }
   });
 };
 
 export const logOut = () => {
   signOut(auth);
+};
+
+export const signInWithGoogle = (navigate) => {
+  const provider = new GoogleAuthProvider();
+  signInWithPopup(auth, provider)
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
+  navigate("/");
 };

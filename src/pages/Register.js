@@ -11,19 +11,23 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
-import { createUser } from "../helpers/firebase";
+import { createUser, signInWithGoogle } from "../helpers/firebase";
 import { useNavigate } from "react-router-dom";
+import GoogleIcon from "@mui/icons-material/Google";
 
 const theme = createTheme();
 
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
+  const [userName, setUserName] = useState("");
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
-    createUser(email, password, navigate, name);
+    createUser(email, password, navigate, userName);
+  };
+  const handleGoogleProvider = () => {
+    signInWithGoogle(navigate);
   };
 
   return (
@@ -55,12 +59,12 @@ export default function Register() {
               required
               fullWidth
               id="text"
-              label="Name"
-              name="name"
-              autoComplete="name"
+              label="Username"
+              name="username"
+              autoComplete="username"
               autoFocus
-              onChange={(e) => setName(e.target.value)}
-              value={name}
+              onChange={(e) => setUserName(e.target.value)}
+              value={userName}
             />
             <TextField
               margin="normal"
@@ -91,10 +95,21 @@ export default function Register() {
               label="Remember me"
             />
             <Button
+              fullWidth
+              variant="contained"
+              type="button"
+              onClick={handleGoogleProvider}
+            >
+              Continue with Google
+              <GoogleIcon />
+            </Button>
+
+            <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={handleSubmit}
             >
               Register
             </Button>
