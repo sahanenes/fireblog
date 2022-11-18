@@ -82,11 +82,13 @@ const NewBlog = () => {
           /> */}
           <Textarea
             color="primary"
-            minRows={2}
+            minRows={5}
             size="lg"
             label="content"
+            id="content"
             placeholder="content"
             name="content"
+            autoComplete="img-url"
             value={info.content || ""}
             onChange={handleChange}
           />

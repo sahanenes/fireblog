@@ -9,10 +9,13 @@ import Link from "@mui/joy/Link";
 import Favorite from "@mui/icons-material/Favorite";
 import Box from "@mui/material/Box";
 import { UseFetch } from "../helpers/functions";
+import LinearProgress from "@mui/material/LinearProgress";
+import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
   const { contactList } = UseFetch();
-  console.log(contactList?.img_url);
+  const navigate = useNavigate();
+
   return (
     <>
       <Box
@@ -25,13 +28,18 @@ export default function Dashboard() {
         }}
       >
         {contactList?.length === 0 ? (
-          <p>Loading </p>
+          <Box sx={{ width: "100%" }}>
+            <LinearProgress />
+          </Box>
         ) : (
           contactList?.map((item, index) => (
             <Card
               key={index}
               variant="outlined"
-              sx={{ width: 320, margin: "1rem" }}
+              sx={{
+                width: 320,
+                margin: "1rem",
+              }}
             >
               <CardOverflow>
                 <AspectRatio ratio="2">

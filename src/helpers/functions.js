@@ -10,7 +10,6 @@ export const AddContact = (info) => {
     content: info.content,
     img: info.img_url,
   });
-  console.log("geldi mi");
 };
 
 // readinfo
