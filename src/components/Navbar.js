@@ -19,12 +19,8 @@ export default function Navbar() {
   const navigate = useNavigate();
   const { currentUser } = useContext(AuthContext);
 
-  const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   console.log(currentUser);
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -60,10 +56,15 @@ export default function Navbar() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Photos
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1 }}
+            onClick={() => navigate("/")}
+          >
+            DashBoard
           </Typography>
-          {auth && (
+          {
             <div>
               {currentUser && (
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
@@ -101,7 +102,7 @@ export default function Navbar() {
                 <MenuItem onClick={handleLogout}>Logout</MenuItem>
               </Menu>
             </div>
-          )}
+          }
         </Toolbar>
       </AppBar>
     </Box>
