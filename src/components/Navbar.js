@@ -42,6 +42,10 @@ export default function Navbar() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const handleNewBlog = () => {
+    setAnchorEl(null);
+    navigate("/newblog");
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -59,11 +63,12 @@ export default function Navbar() {
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1 }}
+            sx={{ flexGrow: 1, cursor: "pointer" }}
             onClick={() => navigate("/")}
           >
             DashBoard
           </Typography>
+
           {
             <div>
               {currentUser && (
@@ -100,6 +105,7 @@ export default function Navbar() {
                 <MenuItem onClick={handleLogin}>Login</MenuItem>
                 <MenuItem onClick={handleRegister}>Register</MenuItem>
                 <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                <MenuItem onClick={handleNewBlog}>Newblog</MenuItem>
               </Menu>
             </div>
           }

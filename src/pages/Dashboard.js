@@ -21,6 +21,7 @@ export default function Dashboard() {
           flexDirection: "row",
           alignItems: "center",
           flexWrap: "wrap",
+          justifyContent: "center",
         }}
       >
         {contactList?.length === 0 ? (
