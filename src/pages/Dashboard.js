@@ -32,70 +32,72 @@ export default function Dashboard() {
             <LinearProgress />
           </Box>
         ) : (
-          contactList?.map((item, index) => (
-            <Card
-              key={index}
-              variant="outlined"
-              sx={{
-                width: 320,
-                margin: "1rem",
-              }}
-            >
-              <CardOverflow>
-                <AspectRatio ratio="2">
-                  <img src={item.img} loading="lazy" alt="img" />
-                </AspectRatio>
-                <IconButton
-                  aria-label="Like minimal photography"
-                  size="md"
-                  variant="solid"
-                  color="danger"
-                  sx={{
-                    position: "absolute",
-                    zIndex: 2,
-                    borderRadius: "50%",
-                    right: "1rem",
-                    bottom: 0,
-                    transform: "translateY(50%)",
-                  }}
-                >
-                  <Favorite />
-                </IconButton>
-              </CardOverflow>
-              <Typography level="h2" sx={{ fontSize: "md", mt: 2 }}>
-                <Link href="#multiple-actions" overlay underline="none">
-                  {item.title}
-                </Link>
-              </Typography>
-              <Typography level="body2" sx={{ mt: 0.5, mb: 2 }}>
-                <Link href="#multiple-actions">{item.content}</Link>
-              </Typography>
-              <Divider inset="context" />
-              <CardOverflow
-                variant="soft"
+          contactList?.map((item) => (
+            <div onClick={() => navigate("/details")}>
+              <Card
+                key={item.id}
+                variant="outlined"
                 sx={{
-                  display: "flex",
-                  gap: 1.5,
-                  py: 1.5,
-                  px: "var(--Card-padding)",
-                  bgcolor: "background.level1",
+                  width: 320,
+                  margin: "1rem",
                 }}
               >
-                <Typography
-                  level="body3"
-                  sx={{ fontWeight: "md", color: "text.secondary" }}
-                >
-                  6.3k views
+                <CardOverflow>
+                  <AspectRatio ratio="2">
+                    <img src={item.img} loading="lazy" alt="img" />
+                  </AspectRatio>
+                  <IconButton
+                    aria-label="Like minimal photography"
+                    size="md"
+                    variant="solid"
+                    color="danger"
+                    sx={{
+                      position: "absolute",
+                      zIndex: 2,
+                      borderRadius: "50%",
+                      right: "1rem",
+                      bottom: 0,
+                      transform: "translateY(50%)",
+                    }}
+                  >
+                    <Favorite />
+                  </IconButton>
+                </CardOverflow>
+                <Typography level="h2" sx={{ fontSize: "md", mt: 2 }}>
+                  <Link href="#multiple-actions" overlay underline="none">
+                    {item.title}
+                  </Link>
                 </Typography>
-                <Divider orientation="vertical" />
-                <Typography
-                  level="body3"
-                  sx={{ fontWeight: "md", color: "text.secondary" }}
-                >
-                  1 hour ago
+                <Typography level="body2" sx={{ mt: 0.5, mb: 2 }}>
+                  <Link href="#multiple-actions">{item.content}</Link>
                 </Typography>
-              </CardOverflow>
-            </Card>
+                <Divider inset="context" />
+                <CardOverflow
+                  variant="soft"
+                  sx={{
+                    display: "flex",
+                    gap: 1.5,
+                    py: 1.5,
+                    px: "var(--Card-padding)",
+                    bgcolor: "background.level1",
+                  }}
+                >
+                  <Typography
+                    level="body3"
+                    sx={{ fontWeight: "md", color: "text.secondary" }}
+                  >
+                    6.3k views
+                  </Typography>
+                  <Divider orientation="vertical" />
+                  <Typography
+                    level="body3"
+                    sx={{ fontWeight: "md", color: "text.secondary" }}
+                  >
+                    1 hour ago
+                  </Typography>
+                </CardOverflow>
+              </Card>
+            </div>
           ))
         )}
       </Box>
